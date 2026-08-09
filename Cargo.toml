@@ -1,3 +1,3 @@
 [workspace]
 resolver = "3"
-members = ["checker", "cli", "codegen", "core", "stream", "syntax", "universe"]
+members = ["checker", "cli", "codegen", "core", "ir", "stream", "syntax", "universe"]
