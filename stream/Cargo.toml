@@ -4,3 +4,9 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+auspice-checker = { version = "0.1.0", path = "../checker" }
+auspice-codegen = { version = "0.1.0", path = "../codegen" }
+auspice-core = { version = "0.1.0", path = "../core" }
+auspice-ir = { version = "0.1.0", path = "../ir" }
+auspice-syntax = { version = "0.1.0", path = "../syntax" }
+auspice-universe = { version = "0.1.0", path = "../universe" }
