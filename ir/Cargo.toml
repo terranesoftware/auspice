@@ -4,4 +4,6 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+auspice-core = { version = "0.1.0", path = "../core" }
 auspice-syntax = { version = "0.1.0", path = "../syntax" }
+auspice-universe = { version = "0.1.0", path = "../universe" }
