@@ -1,30 +1,30 @@
-module TestModule {
-    structure TestStruct1;
+module Module {
+    structure Struct1;
     
-    structure TestStruct2 (
+    structure Struct2 (
         signed64
     )
     
-    structure TestStruct {
+    structure Struct3 {
         field1: unsigned64
     }
     
-    enumeration TestEnum {
+    enumeration Enum {
         Variant1,
         Variant2(boolean),
         Variant3 { field1: float64 }
     }
     
-    function TestFunction() -> unsigned64 {
-        use_enum = TestEnum::Variant1;
+    function Fn() -> unsigned64 {
+        use_enum = Enum::Variant1;
     }
 
-    module TestNested {
-        use super::TestEnum;
+    module NestedModule {
+        use super::Enum;
 
-        function TestFunctionNested() -> unsigned64 {
-            use_super_enum = TestEnum::Variant2(false);
-            use_absolute_enum = ::TestModule::TestEnum::Variant3 { field1: 7.5 };
+        function FnNested() -> unsigned64 {
+            use_super_enum = Enum::Variant2(false);
+            use_absolute_enum = ::Module::Enum::Variant3 { field1: 7.5 };
         }
     }
 }
