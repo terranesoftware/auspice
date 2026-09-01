@@ -1,0 +1,26 @@
+enumeration Construct {
+    Module {
+        name: string,
+        body: vector<Construct>
+    },
+    Function {
+        name: string,
+        parameters: vector<(string, Construct)>,
+        returnType: Construct,
+        body: vector<Construct>
+    },
+    Structure {
+        name: string,
+        fields: vector<(string, Construct)>
+    },
+    Enumeration {
+        name: string,
+        variants: vector<EnumerationType>
+    }
+}
+
+enumeration EnumerationType {
+    Unit,
+    Tuple(vector<Construct>),
+    Structure(vector<(string, Construct)>)
+}
