@@ -1,15 +1,15 @@
 module TestModule {
-    struct TestStruct1;
+    structure TestStruct1;
     
-    struct TestStruct2 (
+    structure TestStruct2 (
         signed64
     )
     
-    struct TestStruct {
+    structure TestStruct {
         Field1: unsigned64
     }
     
-    enum TestEnum {
+    enumeration TestEnum {
         Variant1,
         Variant2(bool),
         Variant3 { Field1: float64 }
