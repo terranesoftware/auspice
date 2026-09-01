@@ -1,26 +1,74 @@
+// Internal structure
 enumeration Construct {
     Module {
         name: string,
-        body: vector<Construct>
+        contents: vector<Construct>
     },
     Function {
         name: string,
         parameters: vector<(string, Construct)>,
         returnType: Construct,
-        body: vector<Construct>
+        contents: vector<Construct>
     },
     Structure {
         name: string,
-        fields: vector<(string, Construct)>
+        body: BodyType
     },
     Enumeration {
         name: string,
-        variants: vector<EnumerationType>
+        variants: vector<(string, BodyType)>
     }
 }
 
-enumeration EnumerationType {
+enumeration BodyType {
     Unit,
     Tuple(vector<Construct>),
-    Structure(vector<(string, Construct)>)
+    Named(vector<(string, Construct)>)
+}
+
+// Generated AST
+Construct::Module {
+    name: TestModule,
+    contents: [
+        Construct::Structure {
+            name: Struct1,
+            body: BodyType::Unit
+        },
+        Construct::Structure {
+            name: Struct2,
+            body: BodyType::Tuple(
+                [
+                    ?
+                ]
+            )
+        },
+        Construct::Structure {
+            name: Struct3,
+            body: BodyType::Named(
+                [
+                    (
+                        field1,
+                        ?
+                    )
+                ]
+            )
+        },
+        Construct::Enumeration {
+            name: Enum,
+            variants: [
+                (
+                    variant1,
+                    BodyType::Unit
+                ),
+                (
+                    variant2,
+                    BodyType::Tuple(
+                        [
+                            ?
+                        ]
+                    )
+                )
+            ]
+        }
+    ]
 }
