@@ -10,9 +10,9 @@ module Module {
     }
     
     enumeration Enum {
-        Variant1,
-        Variant2(boolean),
-        Variant3 { field1: float64 }
+        variant1,
+        variant2(boolean),
+        variant3 { field1: float64 }
     }
     
     function Fn() -> unsigned64 {
