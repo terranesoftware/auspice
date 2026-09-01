@@ -1,0 +1,30 @@
+module TestModule {
+    struct TestStruct1;
+    
+    struct TestStruct2 (
+        signed64
+    )
+    
+    struct TestStruct {
+        Field1: unsigned64
+    }
+    
+    enum TestEnum {
+        Variant1,
+        Variant2(bool),
+        Variant3 { Field1: float64 }
+    }
+    
+    function testFunction() -> unsigned64 {
+        use_enum = TestEnum::Variant1;
+    }
+
+    module TestNested {
+        use super::TestEnum;
+
+        function testFunctionNested() -> unsigned64 {
+            use_super_enum = TestEnum::Variant2(false);
+            use_absolute_enum = ::TestModule::TestEnum::Variant3 { Field1: 7.5 };
+        }
+    }
+}
