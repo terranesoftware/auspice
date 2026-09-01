@@ -6,25 +6,25 @@ module TestModule {
     )
     
     structure TestStruct {
-        Field1: unsigned64
+        field1: unsigned64
     }
     
     enumeration TestEnum {
         Variant1,
-        Variant2(bool),
-        Variant3 { Field1: float64 }
+        Variant2(boolean),
+        Variant3 { field1: float64 }
     }
     
-    function testFunction() -> unsigned64 {
+    function TestFunction() -> unsigned64 {
         use_enum = TestEnum::Variant1;
     }
 
     module TestNested {
         use super::TestEnum;
 
-        function testFunctionNested() -> unsigned64 {
+        function TestFunctionNested() -> unsigned64 {
             use_super_enum = TestEnum::Variant2(false);
-            use_absolute_enum = ::TestModule::TestEnum::Variant3 { Field1: 7.5 };
+            use_absolute_enum = ::TestModule::TestEnum::Variant3 { field1: 7.5 };
         }
     }
 }
