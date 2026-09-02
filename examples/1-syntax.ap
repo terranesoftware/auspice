@@ -15,8 +15,10 @@ module Module {
         variant3 { field1: float64 }
     }
     
-    function Fn() -> unsigned64 {
+    function Fn(param1: vector<signed64>) -> unsigned64 {
         use_enum = Enum::Variant1;
+
+        return 0;
     }
 
     module NestedModule {
@@ -25,6 +27,8 @@ module Module {
         function FnNested() -> unsigned64 {
             use_super_enum = Enum::Variant2(false);
             use_absolute_enum = ::Module::Enum::Variant3 { field1: 7.5 };
+
+            return 1;
         }
     }
 }
