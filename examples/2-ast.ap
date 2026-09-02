@@ -22,8 +22,8 @@ enumeration Construct {
 
 enumeration BodyType {
     Unit,
-    Tuple(vector<Construct>),
-    Named(vector<(string, Construct)>)
+    Tuple (vector<Construct>),
+    Named (vector<(string, Construct)>)
 }
 
 // Generated AST
