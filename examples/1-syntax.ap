@@ -11,7 +11,7 @@ module Module {
     
     enumeration Enum {
         variant1,
-        variant2(boolean),
+        variant2 (boolean),
         variant3 { field1: float64 }
     }
     
