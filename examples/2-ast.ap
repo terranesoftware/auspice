@@ -1,5 +1,6 @@
 // Internal structure
 enumeration Construct {
+    Import (string),
     Module {
         name: string,
         contents: vector<Construct>
@@ -8,7 +9,8 @@ enumeration Construct {
         name: string,
         parameters: vector<(string, Construct)>,
         returnType: Construct,
-        contents: vector<Construct>
+        contents: vector<Construct>,
+        returnValue: Construct
     },
     Structure {
         name: string,
@@ -17,7 +19,8 @@ enumeration Construct {
     Enumeration {
         name: string,
         variants: vector<(string, BodyType)>
-    }
+    },
+    Variable (string, Construct)
 }
 
 enumeration BodyType {
@@ -31,11 +34,11 @@ Construct::Module {
     name: TestModule,
     contents: [
         Construct::Structure {
-            name: Struct1,
+            name: "Struct1",
             body: BodyType::Unit
         },
         Construct::Structure {
-            name: Struct2,
+            name: "Struct2",
             body: BodyType::Tuple(
                 [
                     ?
@@ -43,31 +46,79 @@ Construct::Module {
             )
         },
         Construct::Structure {
-            name: Struct3,
-            body: BodyType::Named(
+            name: "Struct3",
+            body: BodyType::Named (
                 [
                     (
-                        field1,
+                        "field1",
                         ?
                     )
                 ]
             )
         },
         Construct::Enumeration {
-            name: Enum,
+            name: "Enum",
             variants: [
                 (
-                    variant1,
+                    "variant1",
                     BodyType::Unit
                 ),
                 (
-                    variant2,
-                    BodyType::Tuple(
+                    "variant2",
+                    BodyType::Tuple (
                         [
                             ?
                         ]
                     )
+                ),
+                (
+                    "variant3",
+                    BodyType::Named (
+                        [
+                            (
+                                "field1",
+                                ?
+                            )
+                        ]
+                    )
                 )
+            ]
+        },
+        Construct::Function {
+            name: "Fn",
+            parameters: [
+                "param1",
+                ?
+            ],
+            returnType: ?,
+            contents: [
+                Construct::Variable (
+                    "use_enum",
+                    ?
+                )
+            ],
+            returnValue: ?
+        },
+        Construct::Module {
+            name: "NestedModule",
+            contents: [
+                Construct::Import ("super::Enum"),
+                Construct::Function {
+                    name: "FnNested",
+                    parameters: [],
+                    returnType: ?,
+                    contents: [
+                        Construct::Variable (
+                            "use_super_enum",
+                            ?
+                        ),
+                        Construct::Variable (
+                            "use_absolute_enum",
+                            ?
+                        )
+                    ],
+                    returnValue: ?
+                }
             ]
         }
     ]
