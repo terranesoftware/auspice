@@ -24,11 +24,9 @@ module Module {
     module NestedModule {
         use super::Enum;
 
-        function FnNested() -> unsigned64 {
+        function FnNested() {
             use_super_enum = Enum::Variant2(false);
             use_absolute_enum = ::Module::Enum::Variant3 { field1: 7.5 };
-
-            return 1;
         }
     }
 }
