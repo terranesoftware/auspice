@@ -7,8 +7,8 @@ enumeration Construct {
     },
     Function {
         name: string,
-        parameters: vector<(string, Construct)>,
-        returnType: Construct,
+        parameters: vector<(string, Type)>,
+        returnType: Type,
         contents: vector<Construct>,
         returnValue: Construct
     },
@@ -25,13 +25,13 @@ enumeration Construct {
 
 enumeration BodyType {
     Unit,
-    Tuple (vector<Construct>),
-    Named (vector<(string, Construct)>)
+    Tuple (vector<Type>),
+    Named (vector<(string, Type)>)
 }
 
 // Generated AST
 Construct::Module {
-    name: TestModule,
+    name: "Module",
     contents: [
         Construct::Structure {
             name: "Struct1",
@@ -39,64 +39,25 @@ Construct::Module {
         },
         Construct::Structure {
             name: "Struct2",
-            body: BodyType::Tuple(
-                [
-                    ?
-                ]
-            )
+            body: BodyType::Tuple ([signed64])
         },
         Construct::Structure {
             name: "Struct3",
-            body: BodyType::Named (
-                [
-                    (
-                        "field1",
-                        ?
-                    )
-                ]
-            )
+            body: BodyType::Named ([("field1", unsigned64)])
         },
         Construct::Enumeration {
             name: "Enum",
             variants: [
-                (
-                    "variant1",
-                    BodyType::Unit
-                ),
-                (
-                    "variant2",
-                    BodyType::Tuple (
-                        [
-                            ?
-                        ]
-                    )
-                ),
-                (
-                    "variant3",
-                    BodyType::Named (
-                        [
-                            (
-                                "field1",
-                                ?
-                            )
-                        ]
-                    )
-                )
+                ("variant1", BodyType::Unit),
+                ("variant2", BodyType::Tuple ([boolean])),
+                ("variant3", BodyType::Named ([("field1", float64)]))
             ]
         },
         Construct::Function {
             name: "Fn",
-            parameters: [
-                "param1",
-                ?
-            ],
-            returnType: ?,
-            contents: [
-                Construct::Variable (
-                    "use_enum",
-                    ?
-                )
-            ],
+            parameters: [("param1", vector<signed64>)],
+            returnType: unsigned64,
+            contents: [Construct::Variable ("use_enum", ::Module::Enum::variant1)],
             returnValue: ?
         },
         Construct::Module {
@@ -106,16 +67,10 @@ Construct::Module {
                 Construct::Function {
                     name: "FnNested",
                     parameters: [],
-                    returnType: ?,
+                    returnType: unit,
                     contents: [
-                        Construct::Variable (
-                            "use_super_enum",
-                            ?
-                        ),
-                        Construct::Variable (
-                            "use_absolute_enum",
-                            ?
-                        )
+                        Construct::Variable ("use_super_enum", ::Module::Enum::variant2(false)),
+                        Construct::Variable ("use_absolute_enum", ::Module::Enum::variant3 { field1: 7.5 })
                     ],
                     returnValue: ?
                 }
