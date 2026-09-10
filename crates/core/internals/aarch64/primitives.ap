@@ -1,0 +1,10 @@
+structure Unsigned32 (register32)
+structure Signed32 (register32)
+structure Float32 (register32)
+
+structure Unsigned64 (register64)
+structure Signed64 (register64)
+structure Float64 (register64)
+
+operation + [Addable, Addable] // FIX THIS (generics)
+trait Addable {} // FIX THIS (generics, probably)
