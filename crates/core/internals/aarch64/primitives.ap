@@ -1,10 +1,46 @@
+trait Add <A | B, C> {
+    function add(A, B) -> C;
+}
+
 structure Unsigned32 (register32)
 structure Signed32 (register32)
-structure Float32 (register32)
+
+implement Add <
+    A: [Unsigned32, Signed32],
+    B: [Unsigned32, Signed32],
+    C: [register32]
+> {
+    function add(A, B) -> C {
+        add(A, B)
+    }
+}
 
 structure Unsigned64 (register64)
 structure Signed64 (register64)
-structure Float64 (register64)
 
-operation + [Addable, Addable] // FIX THIS (generics)
-trait Addable {} // FIX THIS (generics, probably)
+implement Add <
+    A: [Unsigned64, Signed64],
+    B: [Unsigned64, Signed64],
+    C: [register64]
+> {
+    function add(A, B) -> C {
+        add(A, B)
+    }
+}
+
+implement Add <
+    A: [Unsigned32, Signed32],
+    B: [Unsigned64, Signed64],
+    C: [register64]
+> {
+    function add(A, B) -> C {
+        add(A, B)
+    }
+}
+
+operation + <A: Add, B: Add, C> {
+    Add::add(A, B)
+} -> C;
+
+structure Float32 (register32)
+structure Float64 (register64)
